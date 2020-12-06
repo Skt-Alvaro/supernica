@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
-import Link from "next/link";
 import swal from "sweetalert";
 
 const Input = styled.input`
@@ -157,7 +156,6 @@ const Login = () => {
 					Iniciar sesión
 				</Button>
 			</Form>
-			<Link href="/Store">daw</Link>
 		</Div>
 	);
 };
