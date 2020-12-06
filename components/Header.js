@@ -12,11 +12,12 @@ const H3 = styled.h3`
 	color: #fff;
 `;
 
-const Header = () => {
+const Header = ({ name }) => {
+	console.log(name);
 	return (
 		<Div>
 			<H3>SuperNICA</H3>
-			<H3>Hola, Alvaro</H3>
+			<H3>{name}</H3>
 		</Div>
 	);
 };

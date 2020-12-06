@@ -20,7 +20,7 @@ const Container = styled.div`
 const Store = () => {
 	return (
 		<div>
-			<Header />
+			<Header name="Hola, Alvaro" />
 			<Container>
 				<Aside />
 				<Items />

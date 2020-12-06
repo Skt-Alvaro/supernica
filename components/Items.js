@@ -30,12 +30,6 @@ const items = [
 		category: "REFRESCOS",
 		price: 100,
 	},
-	{
-		img: queso,
-		item: "QUESO SECO",
-		category: "REFRESCOS",
-		price: 100,
-	},
 ];
 
 const Container = styled.div`
