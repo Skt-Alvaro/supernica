@@ -6,16 +6,13 @@ import Spinner from "./Spinner";
 import swal from "sweetalert";
 
 const Input = styled.input`
-	padding: 15px 193px 15px 9px;
+	width: 92%;
 	font-size: 17px;
 	outline: none;
-
-	@media (max-width: 376px) {
-		padding: 15px 140px 15px 9px;
-	}
+	padding: 13px;
 
 	@media (max-width: 321px) {
-		padding: 15px 100px 15px 9px;
+		padding: 8px;
 	}
 `;
 
@@ -25,8 +22,8 @@ const Form = styled.form`
 	justify-items: center;
 `;
 
-const Button = styled.button`
-	padding: 5px 120px;
+const Button = styled.input`
+	padding: 5px 158px;
 	font-size: 25px;
 	background: #0c56cc;
 	color: #fff;
@@ -35,11 +32,11 @@ const Button = styled.button`
 	cursor: pointer;
 
 	@media (max-width: 376px) {
-		padding: 5px 96px;
+		padding: 5px 133px;
 	}
 
 	@media (max-width: 321px) {
-		padding: 5px 76px;
+		padding: 5px 109px;
 	}
 `;
 
@@ -63,13 +60,17 @@ const Div = styled.div`
 `;
 
 const Div2 = styled.div`
-	display: grid;
+	width: 100%;
 `;
 
-const Label = styled.label`
-	margin-top: 5px;
+const Label = styled.p`
+	margin-top: 3px;
 	color: red;
 	font-size: 17px;
+
+	@media (max-width: 321px) {
+		font-size: 14px;
+	}
 `;
 
 const Login = () => {
@@ -155,7 +156,7 @@ const Login = () => {
 					/>
 					<Label>{errors?.password?.message}</Label>
 				</Div2>
-				<Button type="submit">Iniciar sesión</Button>
+				<Button type="submit" />
 				{loading ? <Spinner /> : null}
 			</Form>
 		</Div>
