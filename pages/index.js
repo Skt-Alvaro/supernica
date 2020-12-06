@@ -20,7 +20,7 @@ const Div = styled.div`
 	margin-left: 25px;
 
 	@media (max-width: 376px) {
-		margin-left: 10px;
+		margin-left: 5px;
 	}
 `;
 
