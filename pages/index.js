@@ -61,6 +61,7 @@ const ShopInfo = () => {
 					<Login />
 				</div>
 			</Container>
+			<Footer />
 		</div>
 	);
 };

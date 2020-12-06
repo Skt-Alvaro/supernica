@@ -1,8 +1,9 @@
-import React from "react";
-import Link from "next/link";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
+import Link from "next/link";
+import swal from "sweetalert";
 
 const Input = styled.input`
 	padding: 15px 193px 15px 9px;
@@ -73,7 +74,16 @@ const Label = styled.label`
 `;
 
 const Login = () => {
+	const [valid, setValid] = useState(false);
 	const { register, handleSubmit, errors } = useForm();
+
+	const newAlert = () => {
+		swal({
+			title: "El correo y la contraseña son incorrectos",
+			icon: "error",
+			buttons: "Continuar",
+		});
+	};
 
 	const router = useRouter();
 
@@ -101,7 +111,7 @@ const Login = () => {
 				if (data.token) {
 					router.push("/Store");
 				} else {
-					console.log("error de credenciales");
+					newAlert();
 				}
 			});
 	};
@@ -143,8 +153,11 @@ const Login = () => {
 					/>
 					<Label>{errors?.password?.message}</Label>
 				</Div2>
-				<Button type="submit">Iniciar sesión</Button>
+				<Button onClick={() => setValid(null)} type="submit">
+					Iniciar sesión
+				</Button>
 			</Form>
+			<Link href="/Store">daw</Link>
 		</Div>
 	);
 };
