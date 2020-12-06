@@ -6,7 +6,7 @@ import Spinner from "./Spinner";
 import swal from "sweetalert";
 
 const Input = styled.input`
-	width: 92%;
+	width: 100%;
 	font-size: 17px;
 	outline: none;
 	padding: 13px;
