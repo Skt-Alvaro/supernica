@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
+import Spinner from "./Spinner";
 import swal from "sweetalert";
 
 const Input = styled.input`
 	padding: 15px 193px 15px 9px;
 	font-size: 17px;
 	outline: none;
-	border: 1px solid #989898;
 
 	@media (max-width: 376px) {
 		padding: 15px 140px 15px 9px;
@@ -73,7 +73,7 @@ const Label = styled.label`
 `;
 
 const Login = () => {
-	const [valid, setValid] = useState(false);
+	const [loading, setLoading] = useState(null);
 	const { register, handleSubmit, errors } = useForm();
 
 	const newAlert = () => {
@@ -87,6 +87,7 @@ const Login = () => {
 	const router = useRouter();
 
 	const onSubmit = async (data) => {
+		setLoading(true);
 		console.log("data is reaedy to sent");
 		console.log(data);
 
@@ -107,6 +108,7 @@ const Login = () => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
+				setLoading(false);
 				if (data.token) {
 					router.push("/Store");
 				} else {
@@ -138,6 +140,7 @@ const Login = () => {
 				<Div2>
 					<Input
 						placeholder="Contraseña"
+						type="password"
 						name="password"
 						ref={register({
 							required: {
@@ -152,9 +155,8 @@ const Login = () => {
 					/>
 					<Label>{errors?.password?.message}</Label>
 				</Div2>
-				<Button onClick={() => setValid(null)} type="submit">
-					Iniciar sesión
-				</Button>
+				<Button type="submit">Iniciar sesión</Button>
+				{loading ? <Spinner /> : null}
 			</Form>
 		</Div>
 	);
