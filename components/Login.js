@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
+import Link from "next/link";
 import styled from "styled-components";
 import Spinner from "./Spinner";
 import swal from "sweetalert";
@@ -63,6 +64,10 @@ const Div2 = styled.div`
 	width: 100%;
 `;
 
+const Div3 = styled.div`
+	display: flex;
+`;
+
 const Label = styled.p`
 	margin-top: 3px;
 	color: red;
@@ -71,6 +76,10 @@ const Label = styled.p`
 	@media (max-width: 321px) {
 		font-size: 14px;
 	}
+`;
+
+const P2 = styled.p`
+	margin-right: 5px;
 `;
 
 const Login = () => {
@@ -132,7 +141,7 @@ const Login = () => {
 							},
 							pattern: {
 								value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-								message: "Mete un email válido",
+								message: "El email no es válido",
 							},
 						})}
 					/>
@@ -156,7 +165,13 @@ const Login = () => {
 					/>
 					<Label>{errors?.password?.message}</Label>
 				</Div2>
-				<Button type="submit" />
+				<Button type="submit" value="Ingresar" />
+				<Div3>
+					<P2>¿Aún no tienes cuenta?</P2>
+					<Link href="/Register">
+						<a>Crea tu cuenta ahora</a>
+					</Link>
+				</Div3>
 				{loading ? <Spinner /> : null}
 			</Form>
 		</Div>
