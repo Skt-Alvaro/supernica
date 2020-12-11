@@ -101,12 +101,7 @@ const Login = () => {
 		console.log("data is reaedy to sent");
 		console.log(data);
 
-		const url = "https://reqres.in/api/login";
-
-		// const infoParaEntrar = {
-		// 	email: "eve.holt@reqres.in",
-		// 	password: "cityslicka",
-		// };
+		const url = "http://165.22.1.82:3000/api/user/login";
 
 		let request = await fetch(url, {
 			method: "POST",
@@ -115,16 +110,15 @@ const Login = () => {
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify(data),
-		})
-			.then((res) => res.json())
-			.then((data) => {
-				setLoading(false);
-				if (data.token) {
-					router.push("/Store");
-				} else {
-					newAlert();
-				}
-			});
+		});
+		setLoading(false);
+		let res = await request.json();
+
+		if (!res.error) {
+			router.push("/Store");
+		} else {
+			newAlert();
+		}
 	};
 	return (
 		<Div>

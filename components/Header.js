@@ -13,7 +13,6 @@ const H3 = styled.h3`
 `;
 
 const Header = ({ name }) => {
-	console.log(name);
 	return (
 		<Div>
 			<H3>SuperNICA</H3>

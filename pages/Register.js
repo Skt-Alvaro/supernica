@@ -3,11 +3,12 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import Header from "../components/Header";
 import styled from "styled-components";
+import Spinner from "../components/Spinner";
 
 const Div = styled.div`
 	display: flex;
 	justify-content: center;
-	margin-top: 10%;
+	margin-top: 8%;
 
 	@media (max-width: 769px) {
 		margin-top: 2%;
@@ -21,15 +22,25 @@ const Form = styled.form`
 	width: 40%;
 
 	@media (max-width: 769px) {
+		display: grid;
+		width: 90%;
+		grid-template-columns: auto;
+	}
+
+	@media (max-width: 426px) {
 		display: block;
 	}
 `;
 
 const Input = styled.input`
-	width: 100%;
+	width: 95%;
 	padding: 10px;
 	font-size: 15px;
 	margin-bottom: 3px;
+
+	@media (width: 768px) {
+		width: 100%;
+	}
 `;
 
 const Button = styled.input`
@@ -58,6 +69,7 @@ const H1 = styled.h1`
 const Div2 = styled.div`
 	@media (max-width: 769px) {
 		margin-bottom: 20px;
+		text-align: center;
 	}
 `;
 
@@ -69,7 +81,7 @@ const Div3 = styled.div`
 `;
 
 const Div4 = styled.div`
-	display: flex;
+	display: block;
 	align-items: center;
 	grid-column: 1 / span 2;
 
@@ -85,13 +97,37 @@ const InputCheck = styled.input`
 
 const Register = () => {
 	const router = useRouter();
+
 	const [loading, setLoading] = useState(null);
+
 	const { register, handleSubmit, errors, watch } = useForm();
+
 	const password = useRef({});
 	password.current = watch("password", "");
 
-	const onSubmit = (data) => {
+	const onSubmit = async (data) => {
+		setLoading(true);
+		delete data.password2;
+		delete data.terms;
 		console.log(data);
+		const url = "http://165.22.1.82:3000/api/user/signup";
+
+		let request = await fetch(url, {
+			method: "POST",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(data),
+		});
+
+		let res = await request.json();
+		setLoading(false);
+
+		if (!res.error) {
+			localStorage.setItem("token", res.token);
+			router.push("/Store");
+		}
 	};
 
 	return (
@@ -105,7 +141,7 @@ const Register = () => {
 					<Div2>
 						<Input
 							placeholder="Nombre"
-							name="name"
+							name="firstname"
 							ref={register({
 								required: {
 									value: true,
@@ -113,12 +149,12 @@ const Register = () => {
 								},
 							})}
 						/>
-						<Label>{errors?.name?.message}</Label>
+						<Label>{errors?.firstname?.message}</Label>
 					</Div2>
 					<Div2>
 						<Input
 							placeholder="Apellido"
-							name="last_name"
+							name="lastname"
 							ref={register({
 								required: {
 									value: true,
@@ -126,7 +162,7 @@ const Register = () => {
 								},
 							})}
 						/>
-						<Label>{errors?.last_name?.message}</Label>
+						<Label>{errors?.lastname?.message}</Label>
 					</Div2>
 					<Div2>
 						<Input
@@ -187,7 +223,7 @@ const Register = () => {
 					<Div2>
 						<Input
 							placeholder="Dirección"
-							name="place"
+							name="location"
 							ref={register({
 								required: {
 									value: true,
@@ -195,23 +231,26 @@ const Register = () => {
 								},
 							})}
 						/>
-						<Label>{errors?.place?.message}</Label>
+						<Label>{errors?.location?.message}</Label>
 					</Div2>
 					<Div4>
-						<InputCheck
-							type="checkbox"
-							name="terms"
-							ref={register({
-								required: {
-									value: true,
-									message: "Este campo es obligatorio",
-								},
-							})}
-						/>
-						<label id="terms">Acepto los términos y condiciones</label>
+						<div>
+							<InputCheck
+								type="checkbox"
+								name="terms"
+								ref={register({
+									required: {
+										value: true,
+										message: "Este campo es obligatorio",
+									},
+								})}
+							/>
+							<label id="terms">Acepto los términos y condiciones</label>
+						</div>
 						<Label>{errors?.terms?.message}</Label>
 					</Div4>
 					<Button type="submit" value="Registrarse" />
+					{loading ? <Spinner /> : null}
 				</Form>
 			</Div>
 		</div>
