@@ -16,7 +16,7 @@ const Header = ({ name }) => {
 	return (
 		<Div>
 			<H3>SuperNICA</H3>
-			<H3>{name}</H3>
+			{name === undefined ? <H3>Inicia sesión</H3> : <H3>{name}</H3>}
 		</Div>
 	);
 };

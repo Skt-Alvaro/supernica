@@ -17,10 +17,20 @@ const Container = styled.div`
 	}
 `;
 
+const handleHeader = () => {
+	try {
+		if (localStorage.getItem("log_name")) {
+			return "Hola, " + localStorage.getItem("log_name");
+		}
+	} catch (error) {
+		return "Inicia sesión";
+	}
+};
+
 const Store = () => {
 	return (
 		<div>
-			<Header name="Hola, Alvaro" />
+			<Header name={handleHeader()} />
 			<Container>
 				<Aside />
 				<Items />

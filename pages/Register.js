@@ -5,6 +5,13 @@ import Header from "../components/Header";
 import styled from "styled-components";
 import Spinner from "../components/Spinner";
 
+const DivBackground = styled.div`
+	background-image: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.fansided.com%2Fwp-content%2Fuploads%2Fgetty-images%2F2017%2F04%2F667493138-the-fc-barcelona-starting-eleven-pictured-prior-to-the-uefa.jpg.jpg&f=1&nofb=1");
+	height: 100vh;
+	width: 100%;
+	background-size: cover;
+`;
+
 const Div = styled.div`
 	display: flex;
 	justify-content: center;
@@ -61,6 +68,7 @@ const Label = styled.label`
 
 const H1 = styled.h1`
 	grid-column: 1 / span 2;
+	color: #fff;
 	@media (max-width: 769px) {
 		margin-bottom: 15px;
 	}
@@ -95,6 +103,12 @@ const InputCheck = styled.input`
 	cursor: pointer;
 `;
 
+const DivCheck = styled.div`
+	@media (max-width: 769px) {
+		text-align: center;
+	}
+`;
+
 const Register = () => {
 	const router = useRouter();
 
@@ -126,12 +140,12 @@ const Register = () => {
 
 		if (!res.error) {
 			localStorage.setItem("token", res.token);
-			router.push("/Store");
+			router.push("/");
 		}
 	};
 
 	return (
-		<div>
+		<DivBackground>
 			<Header />
 			<Div>
 				<Form onSubmit={handleSubmit(onSubmit)}>
@@ -234,7 +248,7 @@ const Register = () => {
 						<Label>{errors?.location?.message}</Label>
 					</Div2>
 					<Div4>
-						<div>
+						<DivCheck>
 							<InputCheck
 								type="checkbox"
 								name="terms"
@@ -245,15 +259,17 @@ const Register = () => {
 									},
 								})}
 							/>
-							<label id="terms">Acepto los términos y condiciones</label>
-						</div>
+							<label style={{ color: "#fff" }} id="terms">
+								Acepto los términos y condiciones
+							</label>
+						</DivCheck>
 						<Label>{errors?.terms?.message}</Label>
 					</Div4>
 					<Button type="submit" value="Registrarse" />
 					{loading ? <Spinner /> : null}
 				</Form>
 			</Div>
-		</div>
+		</DivBackground>
 	);
 };
 

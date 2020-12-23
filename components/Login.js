@@ -98,8 +98,6 @@ const Login = () => {
 
 	const onSubmit = async (data) => {
 		setLoading(true);
-		console.log("data is reaedy to sent");
-		console.log(data);
 
 		const url = "http://165.22.1.82:3000/api/user/login";
 
@@ -116,6 +114,9 @@ const Login = () => {
 
 		if (!res.error) {
 			router.push("/Store");
+			localStorage.setItem("log_token", res.token);
+			localStorage.setItem("log_id", res.user.id);
+			localStorage.setItem("log_name", res.user.firstname);
 		} else {
 			newAlert();
 		}

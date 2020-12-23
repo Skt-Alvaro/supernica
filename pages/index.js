@@ -31,10 +31,6 @@ const Container = styled.div`
 	@media (max-width: 768px) {
 		grid-template-columns: 100%;
 	}
-
-	@media (min-height: 1367px) {
-		grid-template-columns: 100%;
-	}
 `;
 
 const Img = styled.img`
