@@ -69,11 +69,11 @@ function Aside(props) {
             <nav className={classes.drawer} aria-label="mailbox folders">
                 <Hidden smUp implementation="css">
                     <Drawer
-                        container={container}
-                        variant="temporary"
-                        anchor={theme.direction === "rtl" ? "right" : "left"}
-                        open={mobileOpen}
-                        onClose={handleDrawerToggle}
+                        container={props.drawerContainer}
+                        variant={props.drawerVariant}
+                        anchor={props.drawerAnchor}
+                        open={props.drawerOpen}
+                        onClose={props.drawerOnClose}
                         classes={{
                             paper: classes.drawerPaper,
                         }}
@@ -101,10 +101,6 @@ function Aside(props) {
 }
 
 Aside.propTypes = {
-    /**
-     * Injected by the documentation to work in an iframe.
-     * You won't need it on your project.
-     */
     window: PropTypes.func,
 };
 
