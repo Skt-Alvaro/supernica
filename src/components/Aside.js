@@ -1,60 +1,127 @@
 import React from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import Divider from "@material-ui/core/Divider";
+import Drawer from "@material-ui/core/Drawer";
+import Hidden from "@material-ui/core/Hidden";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import AccountBoxIcon from "@material-ui/icons/AccountBox";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
-const Div = styled.div`
-    background: #f4f4f4;
-    height: 100vh;
-    @media (max-width: 426px) {
-        height: 32vh;
-    }
-    @media (min-height: 1365px) {
-        height: 100vh;
-    }
-`;
+const drawerWidth = 240;
 
-const Li = styled.li`
-    list-style: none;
-    margin-top: 13px;
-    cursor: pointer;
-`;
+function Aside(props) {
+    const { window } = props;
+    const classes = useStyles();
+    const theme = useTheme();
+    const [mobileOpen, setMobileOpen] = React.useState(false);
 
-const H3 = styled.h3`
-    margin-bottom: 35px;
-    padding-top: 25px;
-    cursor: pointer;
-`;
+    const handleDrawerToggle = () => {
+        setMobileOpen(!mobileOpen);
+    };
 
-const Div2 = styled.div`
-    margin-left: 20px;
-`;
+    const asideMethods = [
+        {
+            method: "Mi cuenta",
+            icon: <AccountBoxIcon />,
+        },
+        {
+            method: "Mis productos favoritos",
+            icon: <FavoriteIcon />,
+        },
+        {
+            method: "Mis compras",
+            icon: <ShoppingBasketIcon />,
+        },
+        {
+            method: "Cerrar sesión",
+            icon: <ExitToAppIcon />,
+        },
+    ];
 
-const Aside = () => {
-    return (
+    const drawer = (
         <div>
-            <Div>
-                <Div2>
-                    <H3>MI CUENTA</H3>
-                    <ul>
-                        <Li>
-                            <strong>MIS PRODUCTOS FAVORITOS</strong>
-                        </Li>
-                        <Li>Mis compras</Li>
-                        <Li>Mi cuenta</Li>
-                        <Link href="/Store">
-                            <Li>Store</Li>
-                        </Link>
-                        <Link href="/Add">
-                            <Li>Añadir productos</Li>
-                        </Link>
-                        <Link href="/Get">
-                            <Li>Get productos</Li>
-                        </Link>
-                    </ul>
-                </Div2>
-            </Div>
+            <div className={classes.toolbar} />
+            <Divider />
+            <List>
+                {asideMethods.map((methods, i) => {
+                    return (
+                        <ListItem button key={i}>
+                            <ListItemIcon>{methods.icon}</ListItemIcon>
+                            <ListItemText primary={methods.method} />
+                        </ListItem>
+                    );
+                })}
+            </List>
         </div>
     );
+
+    const container =
+        window !== undefined ? () => window().document.body : undefined;
+
+    return (
+        <div className={classes.root}>
+            <nav className={classes.drawer} aria-label="mailbox folders">
+                <Hidden smUp implementation="css">
+                    <Drawer
+                        container={container}
+                        variant="temporary"
+                        anchor={theme.direction === "rtl" ? "right" : "left"}
+                        open={mobileOpen}
+                        onClose={handleDrawerToggle}
+                        classes={{
+                            paper: classes.drawerPaper,
+                        }}
+                        ModalProps={{
+                            keepMounted: true,
+                        }}
+                    >
+                        {drawer}
+                    </Drawer>
+                </Hidden>
+                <Hidden xsDown implementation="css">
+                    <Drawer
+                        classes={{
+                            paper: classes.drawerPaper,
+                        }}
+                        variant="permanent"
+                        open
+                    >
+                        {drawer}
+                    </Drawer>
+                </Hidden>
+            </nav>
+        </div>
+    );
+}
+
+Aside.propTypes = {
+    /**
+     * Injected by the documentation to work in an iframe.
+     * You won't need it on your project.
+     */
+    window: PropTypes.func,
 };
 
 export default Aside;
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        display: "flex",
+    },
+    drawer: {
+        [theme.breakpoints.up("sm")]: {
+            width: drawerWidth,
+            flexShrink: 0,
+        },
+    },
+    toolbar: theme.mixins.toolbar,
+    drawerPaper: {
+        width: drawerWidth,
+    },
+}));
