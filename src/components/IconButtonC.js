@@ -1,23 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 
 const useStyles = makeStyles((theme) => ({
     menuButton: {
-        marginRight: theme.spacing(2),
+        [theme.breakpoints.up("sm")]: {
+            display: "none",
+        },
+    },
+    width: {
+        width: 0,
     },
 }));
 
-const IconButtonC = () => {
+const IconButtonC = (props) => {
     const classes = useStyles();
     return (
-        <div>
+        <div className={classes.width}>
             <IconButton
-                edge="start"
-                className={classes.menuButton}
                 color="inherit"
-                aria-label="menu"
+                aria-label="open drawer"
+                edge="start"
+                onClick={props.open}
+                className={classes.menuButton}
             >
                 <MenuIcon />
             </IconButton>

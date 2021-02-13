@@ -23,13 +23,15 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function ButtonAppBar() {
+export default function Header(props) {
     const classes = useStyles();
+    console.log(props);
 
     return (
         <div className={classes.root}>
-            <AppBar position="relative">
+            <AppBar position={props.position} className={props.className}>
                 <Toolbar>
+                    {props.icon}
                     <img src={logo} className={classes.img} alt="" />
                 </Toolbar>
             </AppBar>

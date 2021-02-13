@@ -7,7 +7,7 @@ import Header from "./Header";
 const LoginPage = () => {
     return (
         <div>
-            <Header />
+            <Header position="relative" />
             <Grid container>
                 <Grid item lg={6} xs={12} sm={12} md={6}>
                     <LoginInfoLeft />
