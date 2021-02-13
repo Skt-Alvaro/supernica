@@ -2,21 +2,27 @@ import React from "react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { loginAction } from "../store/actions/loginAction";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import swal from "sweetalert";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
+import Grid from "@material-ui/core/Grid";
+import { makeStyles } from "@material-ui/core/styles";
+import { Typography } from "@material-ui/core";
+import Spinner from "./Spinner";
 
 const Login = () => {
+    const classes = useStyle();
     const history = useHistory();
     const dispatch = useDispatch();
+    const { loading } = useSelector((state) => state.user);
     const { register, handleSubmit, errors } = useForm();
 
     const onSubmit = async (data) => {
-        let { error } = await dispatch(loginAction(data));
+        let { error, errorMsg } = await dispatch(loginAction(data));
 
         if (error) {
             swal({
-                title: "El correo y la contraseña son incorrectos",
+                title: errorMsg,
                 icon: "error",
                 buttons: "Continuar",
             });
@@ -27,94 +33,118 @@ const Login = () => {
 
     return (
         <Div>
-            <Form onSubmit={handleSubmit(onSubmit)}>
-                <H1>Ingresa tu cuenta</H1>
-                <div>
-                    <Input
-                        type="email"
-                        placeholder="Correo Electrónico"
-                        name="email"
-                        ref={register({
-                            required: {
-                                value: true,
-                                message: "Este campo es obligatorio",
-                            },
-                            pattern: {
-                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                                message: "El email no es válido",
-                            },
-                        })}
-                    />
-                    <label style={{ color: "red" }}>
-                        {errors?.email?.message}
-                    </label>
-                </div>
-                <div>
-                    <Input
-                        type="password"
-                        placeholder="Contraseña"
-                        name="password"
-                        ref={register({
-                            required: {
-                                value: true,
-                                message: "Este campo es obligatorio",
-                            },
-                        })}
-                    />
-                    <label style={{ color: "red" }}>
-                        {errors?.password?.message}
-                    </label>
-                </div>
-                <Button type="submit">Iniciar sesión</Button>
-            </Form>
+            {loading ? <Spinner /> : null}
+            <Grid container>
+                <Grid item xs={12}>
+                    <form
+                        onSubmit={handleSubmit(onSubmit)}
+                        className={classes.container}
+                    >
+                        <Typography variant="h4" color="initial">
+                            Ingresa tu cuenta
+                        </Typography>
+                        <div className={classes.inputContainer}>
+                            <input
+                                className={classes.input}
+                                type="email"
+                                placeholder="Correo Electrónico"
+                                name="email"
+                                ref={register({
+                                    required: {
+                                        value: true,
+                                        message: "Este campo es obligatorio",
+                                    },
+                                    pattern: {
+                                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                        message: "El email no es válido",
+                                    },
+                                })}
+                            />
+                            <label style={{ color: "red", fontSize: "13px" }}>
+                                {errors?.email?.message}
+                            </label>
+                        </div>
+                        <div className={classes.inputContainer}>
+                            <input
+                                className={classes.input}
+                                type="password"
+                                placeholder="Contraseña"
+                                name="password"
+                                ref={register({
+                                    required: {
+                                        value: true,
+                                        message: "Este campo es obligatorio",
+                                    },
+                                })}
+                            />
+                            <label style={{ color: "red", fontSize: "13px" }}>
+                                {errors?.password?.message}
+                            </label>
+                        </div>
+                        <input
+                            className={classes.button}
+                            type="submit"
+                            value="Iniciar sesión"
+                        />
+                    </form>
+                    <div className={classes.register}>
+                        <p className={classes.mr}>¿Aún no tienes cuenta?</p>
+                        <Link to="/register">
+                            <a>Crea tu cuenta ahora</a>
+                        </Link>
+                    </div>
+                </Grid>
+            </Grid>
         </Div>
     );
 };
 
 export default Login;
 
-const Input = styled.input`
-    width: 100%;
-    font-size: 17px;
-    outline: none;
-    padding: 13px;
-    @media (max-width: 321px) {
-        padding: 8px;
-    }
-`;
-
-const Form = styled.form`
-    display: grid;
-    grid-gap: 2rem;
-    justify-items: center;
-`;
-
-const Button = styled.button`
-    padding: 5px 120px;
-    font-size: 25px;
-    background: #0c56cc;
-    color: #fff;
-    outline: none;
-    border: none;
-    cursor: pointer;
-
-    @media (max-width: 376px) {
-        padding: 5px 96px;
-    }
-
-    @media (max-width: 321px) {
-        padding: 5px 76px;
-    }
-`;
-
-const H1 = styled.h1`
-    margin-bottom: 5%;
-`;
+const useStyle = makeStyles((theme) => ({
+    container: {
+        textAlign: "center",
+    },
+    input: {
+        width: "100%",
+        padding: "17px 20px",
+        display: "inline-block",
+        border: "1px solid #ccc",
+        borderRadius: "4px",
+        boxSizing: "border-box",
+        fontSize: "15px",
+    },
+    button: {
+        fontSize: "25px",
+        background: theme.palette.primary.main,
+        color: "#fff",
+        outline: "none",
+        border: "none",
+        cursor: "pointer",
+        marginTop: "10px",
+        width: "75%",
+        padding: "7px",
+    },
+    inputContainer: {
+        width: "75%",
+        textAlign: "left",
+        marginTop: "20px",
+        margin: "0 auto",
+    },
+    register: {
+        display: "flex",
+        justifyContent: "center",
+        marginTop: "10px",
+    },
+    mr: {
+        marginRight: "5px",
+    },
+}));
 
 const Div = styled.div`
     display: flex;
     justify-content: center;
-    margin-top: 20%;
+    margin-top: 24%;
 
     @media (max-width: 768px) {
         margin-top: 3%;

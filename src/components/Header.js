@@ -1,21 +1,38 @@
 import React from "react";
-import styled from "styled-components";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import logo from "../logo/logoletter2.png";
 
-const Div = styled.div`
-  background-color: #0c56cc;
-  padding: 28px 25px 28px 25px;
-`;
+const useStyles = makeStyles((theme) => ({
+    root: {
+        flexGrow: 1,
+    },
+    menuButton: {
+        marginRight: theme.spacing(2),
+    },
+    title: {
+        flexGrow: 1,
+    },
+    img: {
+        maxWidth: "100%",
+        height: "auto",
+        [theme.breakpoints.down("sm")]: {
+            margin: "0 auto",
+        },
+    },
+}));
 
-const H3 = styled.h3`
-  color: #fff;
-`;
+export default function ButtonAppBar() {
+    const classes = useStyles();
 
-const Header = () => {
-  return (
-    <Div>
-      <H3>SuperNICA</H3>
-    </Div>
-  );
-};
-
-export default Header;
+    return (
+        <div className={classes.root}>
+            <AppBar position="relative">
+                <Toolbar>
+                    <img src={logo} className={classes.img} alt="" />
+                </Toolbar>
+            </AppBar>
+        </div>
+    );
+}

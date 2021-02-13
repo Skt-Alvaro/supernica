@@ -1,12 +1,11 @@
-import * as types from "../types/loginTypes";
+import * as types from "../types/registerTypes";
 
-export const loginAction = (request) => async (dispatch) => {
+export const registerAction = (request) => async (dispatch) => {
     dispatch({
-        type: types.LOGIN_LOADING,
+        type: types.REGISTER_LOADING,
     });
-
     try {
-        const url = "http://127.0.0.1:8000/api/users/login";
+        const url = "http://127.0.0.1:8000/api/users/register";
         const req = await fetch(url, {
             method: "POST",
             headers: {
@@ -18,23 +17,23 @@ export const loginAction = (request) => async (dispatch) => {
         const res = await req.json();
         if (res.error) {
             dispatch({
-                type: types.LOGIN_ERROR,
+                type: types.REGISTER_ERROR,
                 payload: res.error,
             });
             return {
                 error: true,
-                errorMsg: "Las credenciales son incorrectas",
+                errorMsg: "Este email ya está registrado, intenta con otro",
             };
         } else {
             dispatch({
-                type: types.LOGIN_LOAD,
+                type: types.REGISTER_LOAD,
                 payload: res,
             });
             return { error: false };
         }
     } catch (error) {
         dispatch({
-            type: types.LOGIN_ERROR,
+            type: types.REGISTER_ERROR,
             payload: error.message,
         });
         return { error: true };
