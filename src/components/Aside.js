@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
@@ -7,40 +7,50 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import { useSelector } from "react-redux";
+import ForwardIcon from "@material-ui/icons/Forward";
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
 
 function Aside(props) {
-    const { window } = props;
+    const [log, setLog] = useState("Iniciar sesión");
+    const [icon, setIcon] = useState(<ForwardIcon />);
+    const { token } = useSelector((state) => state.user);
     const classes = useStyles();
-    const theme = useTheme();
-    const [mobileOpen, setMobileOpen] = React.useState(false);
 
-    const handleDrawerToggle = () => {
-        setMobileOpen(!mobileOpen);
-    };
+    useEffect(() => {
+        if (token) {
+            setLog("Cerrar sesión");
+            setIcon(<ExitToAppIcon />);
+        }
+    }, [token]);
 
     const asideMethods = [
         {
             method: "Mi cuenta",
             icon: <AccountBoxIcon />,
+            url: "/my-account",
         },
         {
             method: "Mis productos favoritos",
             icon: <FavoriteIcon />,
+            url: "/favorite-products",
         },
         {
             method: "Mis compras",
             icon: <ShoppingBasketIcon />,
+            url: "/my-shopping",
         },
         {
-            method: "Cerrar sesión",
-            icon: <ExitToAppIcon />,
+            method: log,
+            icon: icon,
+            url: "/login",
         },
     ];
 
@@ -51,7 +61,12 @@ function Aside(props) {
             <List>
                 {asideMethods.map((methods, i) => {
                     return (
-                        <ListItem button key={i}>
+                        <ListItem
+                            button
+                            key={i}
+                            component={Link}
+                            to={methods.url}
+                        >
                             <ListItemIcon>{methods.icon}</ListItemIcon>
                             <ListItemText primary={methods.method} />
                         </ListItem>
@@ -60,9 +75,6 @@ function Aside(props) {
             </List>
         </div>
     );
-
-    const container =
-        window !== undefined ? () => window().document.body : undefined;
 
     return (
         <div className={classes.root}>

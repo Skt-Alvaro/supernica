@@ -5,8 +5,12 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Header from "./Header";
 import IconButtonC from "./IconButtonC";
 import Aside from "./Aside";
+import Hello from "./Hello";
+import StoreItems from "./StoreItems";
+import { useSelector } from "react-redux";
 
 function StorePage(props) {
+    const { user } = useSelector((state) => state.user);
     const { window } = props;
     const classes = useStyles();
     const theme = useTheme();
@@ -25,6 +29,7 @@ function StorePage(props) {
                 position="fixed"
                 className={classes.appBar}
                 icon={<IconButtonC open={handleDrawerToggle} />}
+                hello={<Hello name={user.firstname} />}
             />
             <Aside
                 drawerContainer={container}
@@ -33,10 +38,7 @@ function StorePage(props) {
                 drawerOpen={mobileOpen}
                 drawerOnClose={handleDrawerToggle}
             />
-            <main className={classes.content}>
-                <div className={classes.toolbar} />
-                {/* aqui va los productos */}
-            </main>
+            <StoreItems />
         </div>
     );
 }
@@ -62,7 +64,17 @@ const useStyles = makeStyles((theme) => ({
     },
     toolbar: theme.mixins.toolbar,
     content: {
-        flexGrow: 1,
-        padding: theme.spacing(3),
+        width: "100%",
+        margin: "0 auto",
+        [theme.breakpoints.down("sm")]: {
+            padding: "10px",
+        },
+    },
+    gridcontainer: {
+        justifyContent: "space-between",
+    },
+    name: {
+        position: "absolute",
+        right: "20px",
     },
 }));

@@ -15,8 +15,8 @@ function App() {
             <ThemeProvider theme={theme}>
                 <BrowserRouter>
                     <Route exact path="/login" component={LoginPage} />
-                    <Redirect from="/" to="/login" />
                     <Route exact path="/store" component={StorePage} />
+                    <Redirect from="/" to="/store" />
                     <Route exact path="/register" component={RegisterPage} />
                 </BrowserRouter>
             </ThemeProvider>

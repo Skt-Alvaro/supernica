@@ -17,15 +17,18 @@ const useStyles = makeStyles((theme) => ({
     img: {
         maxWidth: "100%",
         height: "auto",
-        [theme.breakpoints.down("sm")]: {
+        [theme.breakpoints.down("xs")]: {
             margin: "0 auto",
         },
+    },
+    name: {
+        position: "absolute",
+        right: "20px",
     },
 }));
 
 export default function Header(props) {
     const classes = useStyles();
-    console.log(props);
 
     return (
         <div className={classes.root}>
@@ -33,6 +36,7 @@ export default function Header(props) {
                 <Toolbar>
                     {props.icon}
                     <img src={logo} className={classes.img} alt="" />
+                    {props.hello}
                 </Toolbar>
             </AppBar>
         </div>

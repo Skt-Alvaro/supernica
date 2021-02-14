@@ -16,14 +16,14 @@ export const loginAction = (request) => async (dispatch) => {
             body: JSON.stringify(request),
         });
         const res = await req.json();
-        if (res.error) {
+        if (!res.token) {
             dispatch({
                 type: types.LOGIN_ERROR,
                 payload: res.error,
             });
             return {
                 error: true,
-                errorMsg: "Las credenciales son incorrectas",
+                errorMsg: "El correo y la contraseña son incorrectos",
             };
         } else {
             dispatch({
