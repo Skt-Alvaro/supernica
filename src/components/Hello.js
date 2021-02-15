@@ -12,7 +12,6 @@ const Hello = (props) => {
         <div>
             <Hidden xsDown>
                 <Typography
-                    align=""
                     variant="h6"
                     color="initial"
                     className={classes.name}
@@ -21,7 +20,7 @@ const Hello = (props) => {
                         `Hola, ${props.name}`
                     ) : (
                         <Link to="/login" className={classes.link}>
-                            <a>Inicia sesión</a>
+                            Inicia sesión
                         </Link>
                     )}
                 </Typography>

@@ -89,9 +89,7 @@ const Login = () => {
                     </form>
                     <div className={classes.register}>
                         <p className={classes.mr}>¿Aún no tienes cuenta?</p>
-                        <Link to="/register">
-                            <a>Crea tu cuenta ahora</a>
-                        </Link>
+                        <Link to="/register">Crea tu cuenta ahora</Link>
                     </div>
                 </Grid>
             </Grid>

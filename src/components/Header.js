@@ -5,9 +5,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 import logo from "../logo/logoletter2.png";
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-    },
     menuButton: {
         marginRight: theme.spacing(2),
     },
