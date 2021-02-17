@@ -7,6 +7,7 @@ import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
 import { ThemeProvider } from "@material-ui/core";
 import theme from "./helpers/themeConfig";
+import ProductPage from "./components/ProductPage";
 
 function App() {
     const store = generateStore();
@@ -18,6 +19,7 @@ function App() {
                     <Route exact path="/store" component={StorePage} />
                     <Redirect from="/" to="/store" />
                     <Route exact path="/register" component={RegisterPage} />
+                    <Route exact path="/product/:id" component={ProductPage} />
                 </BrowserRouter>
             </ThemeProvider>
         </Provider>

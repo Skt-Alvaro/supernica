@@ -27,7 +27,7 @@ export const registerAction = (request) => async (dispatch) => {
         } else {
             dispatch({
                 type: types.REGISTER_LOAD,
-                payload: res,
+                payload: res.response,
             });
             return { error: false };
         }
