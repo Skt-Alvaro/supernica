@@ -8,19 +8,14 @@ import Aside from "./Aside";
 import Hello from "./Hello";
 import StoreItems from "./StoreItems";
 import { useSelector } from "react-redux";
+import useOpenDrawer from "../helpers/useOpenDrawer";
 
 function StorePage(props) {
     const { user } = useSelector((state) => state.user);
     const { window } = props;
     const classes = useStyles();
     const theme = useTheme();
-    const [mobileOpen, setMobileOpen] = React.useState(false);
-
-    const handleDrawerToggle = () => {
-        setMobileOpen(!mobileOpen);
-    };
-    const container =
-        window !== undefined ? () => window().document.body : undefined;
+    const { mobileOpen, handleDrawerToggle, container } = useOpenDrawer(window);
 
     return (
         <div className={classes.root}>

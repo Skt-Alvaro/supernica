@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
         position: "absolute",
         right: "20px",
     },
+    toolbar: theme.mixins.toolbar,
 }));
 
 export default function Header(props) {
