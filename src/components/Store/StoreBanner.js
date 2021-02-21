@@ -63,11 +63,6 @@ const useStyle = makeStyles((theme) => ({
         left: "27%",
         color: "#fff",
         fontFamily: "Kaushan Script, cursive",
-        [theme.breakpoints.up("lg")]: {
-            top: "11%",
-            left: "16%",
-            fontSize: "150px",
-        },
         [theme.breakpoints.down("md")]: {
             top: "14%",
             left: "20%",
@@ -87,11 +82,7 @@ const useStyle = makeStyles((theme) => ({
         position: "absolute",
         top: "53%",
         left: "28%",
-        [theme.breakpoints.up("lg")]: {
-            top: "48%",
-            left: "18%",
-            fontSize: "30px",
-        },
+
         [theme.breakpoints.down("md")]: {
             top: "48%",
             left: "21%",
