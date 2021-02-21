@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
-import { loginAction } from "../store/actions/loginAction";
+import { loginAction } from "../../store/actions/loginAction";
 import { useDispatch, useSelector } from "react-redux";
 import swal from "sweetalert";
 import { useHistory, Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
-import Spinner from "./Spinner";
+import Spinner from "../Spinner";
 
 const Login = () => {
     const classes = useStyle();

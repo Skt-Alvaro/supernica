@@ -1,20 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Header from "./Header";
-import IconButtonC from "./IconButtonC";
-import Aside from "./Aside";
-import Hello from "./Hello";
+import { makeStyles } from "@material-ui/core/styles";
+import Header from "../Header";
+import IconButtonC from "../IconButtonC";
+import Hello from "../Hello";
 import StoreItems from "./StoreItems";
 import { useSelector } from "react-redux";
-import useOpenDrawer from "../helpers/useOpenDrawer";
+import useOpenDrawer from "../../helpers/useOpenDrawer";
+import StoreBanner from "./StoreBanner";
 
 function StorePage(props) {
     const { user } = useSelector((state) => state.user);
     const { window } = props;
     const classes = useStyles();
-    const theme = useTheme();
     const { mobileOpen, handleDrawerToggle, container } = useOpenDrawer(window);
 
     return (
@@ -26,13 +25,7 @@ function StorePage(props) {
                 icon={<IconButtonC open={handleDrawerToggle} />}
                 hello={<Hello name={user.firstname} />}
             />
-            <Aside
-                drawerContainer={container}
-                drawerVariant="temporary"
-                drawerAnchor={theme.direction === "rtl" ? "right" : "left"}
-                drawerOpen={mobileOpen}
-                drawerOnClose={handleDrawerToggle}
-            />
+            <StoreBanner />
             <StoreItems />
         </div>
     );
@@ -46,7 +39,7 @@ export default StorePage;
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        display: "flex",
+        background: "#15161A",
     },
     appBar: {
         zIndex: theme.zIndex.drawer + 1,

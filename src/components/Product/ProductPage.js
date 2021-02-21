@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useSelector } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { getProducts } from "../helpers/getProduct";
-import Spinner from "./Spinner";
-import Header from "./Header";
-import useOpenDrawer from "../helpers/useOpenDrawer";
-import IconButtonC from "./IconButtonC";
-import Hello from "./Hello";
-import Aside from "./Aside";
+import { getProducts } from "../../helpers/getProduct";
+import Spinner from "../Spinner";
+import Header from "../Header";
+import useOpenDrawer from "../../helpers/useOpenDrawer";
+import IconButtonC from "../IconButtonC";
+import Hello from "../Hello";
+import Aside from "../Aside";
 
 const ProductPage = (props) => {
     const { window } = props;

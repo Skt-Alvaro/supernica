@@ -15,9 +15,9 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useForm } from "react-hook-form";
-import { registerAction } from "../store/actions/registerAction";
+import { registerAction } from "../../store/actions/registerAction";
 import swal from "sweetalert";
-import Spinner from "./Spinner";
+import Spinner from "../Spinner";
 
 export default function RegisterPage() {
     const dispatch = useDispatch();

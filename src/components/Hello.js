@@ -4,6 +4,8 @@ import Typography from "@material-ui/core/Typography";
 import Hidden from "@material-ui/core/Hidden";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import Button from "@material-ui/core/Button";
 
 const Hello = (props) => {
     const { token } = useSelector((state) => state.user);
@@ -17,11 +19,25 @@ const Hello = (props) => {
                     className={classes.name}
                 >
                     {token ? (
-                        `Hola, ${props.name}`
+                        `Hi, ${props.name}`
                     ) : (
-                        <Link to="/login" className={classes.link}>
-                            Inicia sesión
-                        </Link>
+                        <div className={classes.items}>
+                            <div>
+                                <Link to="/login" className={classes.link}>
+                                    <Button
+                                        color="secondary"
+                                        className={classes.link}
+                                    >
+                                        Log In
+                                    </Button>
+                                </Link>
+                            </div>
+                            <div className={classes.cart}>
+                                <Link to="/d" className={classes.link}>
+                                    <ShoppingCartIcon />
+                                </Link>
+                            </div>
+                        </div>
                     )}
                 </Typography>
             </Hidden>
@@ -31,17 +47,17 @@ const Hello = (props) => {
 
 export default Hello;
 
-const useStyle = makeStyles({
-    name: {
-        position: "absolute",
-        top: "17px",
-        right: "20px",
+const useStyle = makeStyles((theme) => ({
+    items: {
+        display: "flex",
+        marginTop: "2px",
+    },
+    cart: {
+        marginTop: "5px",
+        marginLeft: "25px",
     },
     link: {
         textDecoration: "none",
         color: "#fff",
-        "&:hover": {
-            textDecoration: "underline",
-        },
     },
-});
+}));

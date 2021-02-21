@@ -13,7 +13,7 @@ const products = [
 const StoreItems = () => {
     const classes = useStyles();
     return (
-        <div style={{ width: "100%" }}>
+        <div id="products">
             <div className={classes.toolbar} />
             <Grid container className={classes.content} spacing={5}>
                 {products.map((product, index) => {
