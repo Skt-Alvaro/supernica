@@ -23,7 +23,7 @@ export default function Header(props) {
             <AppBar
                 position={props.position}
                 className={
-                    header
+                    props.color || header
                         ? `${props.className} ${classes.rootActive}`
                         : `${props.className} ${classes.root}`
                 }
