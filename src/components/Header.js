@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import logo from "../logo/logoletter2.png";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
 export default function Header(props) {
     const [header, setHeader] = useState(false);
@@ -62,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
         maxWidth: "100%",
         height: "auto",
         [theme.breakpoints.down("xs")]: {
-            margin: "0 auto",
+            width: "46%",
         },
     },
     name: {

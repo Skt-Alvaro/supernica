@@ -1,65 +1,53 @@
-import React, { useEffect, useRef, useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Typography from "@material-ui/core/Typography";
-import { Link } from "react-router-dom";
+import React from "react";
+import {
+    Card,
+    CardMedia,
+    CardContent,
+    CardActions,
+    Typography,
+    CardActionArea,
+} from "@material-ui/core";
+import "./style.css";
+import gente from "../../images/gente.jpg";
 
-export default function StoreProductsCard(props) {
-    const [titleResponsive, setTitleResponsive] = useState(false);
-    const productName = useRef();
-    const classes = useStyles();
-    const price = 2000000;
+const CustomCard = (props) => {
+    console.log(props);
+    const price = 200000;
     let si = price.toLocaleString("en");
 
-    useEffect(() => {
-        const title = props.title?.slice(0, 24);
-        setTitleResponsive(title + "...");
-    }, [props.title]);
-
     return (
-        <Card className={classes.root}>
-            <CardActionArea component={Link} to={`/product/${1}`}>
+        <Card className="custom-card">
+            <CardActionArea>
                 <CardMedia
-                    className={classes.media}
-                    image="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.DXRpbP61pNGrqVhwBZgmkQHaEK%26pid%3DApi&f=1"
-                    title="Contemplative Reptile"
+                    component="img"
+                    alt=""
+                    height="260"
+                    className="card-image"
+                    image={gente}
                 />
-                <CardContent>
+                <CardContent className="content">
                     <Typography
+                        className="title"
                         gutterBottom
-                        variant="body1"
-                        ref={productName}
-                        component="p"
+                        variant="h5"
+                        component="h2"
                     >
-                        {titleResponsive}
-                    </Typography>
-                    <Typography gutterBottom variant="h6">
-                        {`$ ${si}`}
+                        {props.title}
                     </Typography>
                 </CardContent>
             </CardActionArea>
+            <CardActions className="actions-content">
+                <Typography
+                    className="price"
+                    gutterBottom
+                    variant="h6"
+                    component="h2"
+                >
+                    ${si}
+                </Typography>
+            </CardActions>
         </Card>
     );
-}
+};
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        width: "100%",
-        [theme.breakpoints.down("sm")]: {
-            maxWidth: 280,
-            margin: "0 auto",
-            marginBottom: "20px",
-        },
-        [theme.breakpoints.down("xs")]: {
-            maxWidth: 540,
-            margin: "0 auto",
-            marginBottom: "20px",
-        },
-    },
-    media: {
-        height: 140,
-    },
-}));
+export default CustomCard;

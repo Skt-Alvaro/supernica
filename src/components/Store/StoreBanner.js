@@ -7,7 +7,7 @@ const StoreBanner = () => {
     return (
         <div className={classes.si}>
             <Grid container>
-                <Grid item xs={6}>
+                <Grid item xs={12} sm={6}>
                     <div className={classes.leftImg}></div>
                 </Grid>
                 <Typography
@@ -53,6 +53,9 @@ const useStyle = makeStyles((theme) => ({
         height: "100vh",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
+        [theme.breakpoints.down("xs")]: {
+            display: "none",
+        },
     },
     primary_text: {
         position: "absolute",
@@ -60,11 +63,48 @@ const useStyle = makeStyles((theme) => ({
         left: "27%",
         color: "#fff",
         fontFamily: "Kaushan Script, cursive",
+        [theme.breakpoints.up("lg")]: {
+            top: "11%",
+            left: "16%",
+            fontSize: "150px",
+        },
+        [theme.breakpoints.down("md")]: {
+            top: "14%",
+            left: "20%",
+        },
+        [theme.breakpoints.down("sm")]: {
+            top: "14%",
+            left: "20%",
+            fontSize: "70px",
+        },
+        [theme.breakpoints.down("xs")]: {
+            top: "14%",
+            left: "8%",
+            fontSize: "59px",
+        },
     },
     primary_button: {
         position: "absolute",
         top: "53%",
         left: "28%",
+        [theme.breakpoints.up("lg")]: {
+            top: "48%",
+            left: "18%",
+            fontSize: "30px",
+        },
+        [theme.breakpoints.down("md")]: {
+            top: "48%",
+            left: "21%",
+        },
+        [theme.breakpoints.down("sm")]: {
+            top: "46%",
+            left: "21%",
+        },
+        [theme.breakpoints.down("xs")]: {
+            top: "50%",
+            left: "9%",
+            fontSize: "15px",
+        },
     },
     often: theme.mixins.toolbar,
 }));

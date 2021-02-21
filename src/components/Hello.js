@@ -12,35 +12,29 @@ const Hello = (props) => {
     const classes = useStyle();
     return (
         <div>
-            <Hidden xsDown>
-                <Typography
-                    variant="h6"
-                    color="initial"
-                    className={classes.name}
-                >
-                    {token ? (
-                        `Hi, ${props.name}`
-                    ) : (
-                        <div className={classes.items}>
-                            <div>
-                                <Link to="/login" className={classes.link}>
-                                    <Button
-                                        color="secondary"
-                                        className={classes.link}
-                                    >
-                                        Log In
-                                    </Button>
-                                </Link>
-                            </div>
-                            <div className={classes.cart}>
-                                <Link to="/d" className={classes.link}>
-                                    <ShoppingCartIcon />
-                                </Link>
-                            </div>
+            <Typography variant="h6" color="initial" className={classes.name}>
+                {token ? (
+                    `Hi, ${props.name}`
+                ) : (
+                    <div className={classes.items}>
+                        <div>
+                            <Link to="/login" className={classes.link}>
+                                <Button
+                                    color="secondary"
+                                    className={classes.link}
+                                >
+                                    Log In
+                                </Button>
+                            </Link>
                         </div>
-                    )}
-                </Typography>
-            </Hidden>
+                        <div className={classes.cart}>
+                            <Link to="/d" className={classes.link}>
+                                <ShoppingCartIcon />
+                            </Link>
+                        </div>
+                    </div>
+                )}
+            </Typography>
         </div>
     );
 };
@@ -55,6 +49,10 @@ const useStyle = makeStyles((theme) => ({
     cart: {
         marginTop: "5px",
         marginLeft: "25px",
+        [theme.breakpoints.down("xs")]: {
+            marginTop: "5px",
+            marginLeft: "10px",
+        },
     },
     link: {
         textDecoration: "none",
