@@ -13,6 +13,9 @@ const theme = createMuiTheme({
             secondary: "#fff",
         },
     },
+    breakpoints: {
+        laptopL: 1440,
+    },
 });
 
 export default theme;
