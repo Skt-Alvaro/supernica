@@ -25,6 +25,7 @@ export const registerAction = (request) => async (dispatch) => {
                 errorMsg: "Este email ya está registrado, intenta con otro",
             };
         } else {
+            localStorage.setItem("token", res.token);
             dispatch({
                 type: types.REGISTER_LOAD,
                 payload: res.response,

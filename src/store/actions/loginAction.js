@@ -26,6 +26,7 @@ export const loginAction = (request) => async (dispatch) => {
                 errorMsg: "El correo y la contraseña son incorrectos",
             };
         } else {
+            localStorage.setItem("token", res.token);
             dispatch({
                 type: types.LOGIN_LOAD,
                 payload: res,

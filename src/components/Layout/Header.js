@@ -6,20 +6,17 @@ import logo from "../../images/logo/logoletter2.png";
 import { useSelector } from "react-redux";
 
 export default function Header(props) {
-    const state = useSelector((state) => state.header);
-    console.log(state);
-    const [header, setHeader] = useState(false);
+    const { position, change_background_color, show_right_items } = useSelector(
+        (state) => state.header
+    );
+    const [headerChangeColor, setHeaderChangeColor] = useState(false);
     const classes = useStyles();
 
     const changeBackground = () => {
         if (window.scrollY >= 80) {
-            if (state?.change_backgroun_color) {
-                setHeader(true);
-            }
+            setHeaderChangeColor(true);
         } else {
-            if (state?.change_backgroun_color) {
-                setHeader(false);
-            }
+            setHeaderChangeColor(false);
         }
     };
 
@@ -28,16 +25,18 @@ export default function Header(props) {
     return (
         <div className={classes.root}>
             <AppBar
-                position={state?.position}
+                position={position}
                 className={
-                    !header
-                        ? `${props.className} ${classes.rootActive}`
-                        : `${props.className} ${classes.root}`
+                    change_background_color
+                        ? headerChangeColor
+                            ? `${props.className} ${classes.rootActive}`
+                            : `${props.className} ${classes.root}`
+                        : `${props.className} ${classes.rootActive}`
                 }
             >
                 <Toolbar className={classes.flex}>
                     <img src={logo} className={classes.img} alt="" />
-                    {props.hello}
+                    {show_right_items ? props.hello : null}
                 </Toolbar>
             </AppBar>
         </div>

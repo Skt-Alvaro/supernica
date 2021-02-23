@@ -6,11 +6,14 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
 
-const Login = (data) => {
+const Login = (props) => {
+    const { getUserInfo } = props;
     const classes = useStyle();
     const { register, handleSubmit, errors } = useForm();
 
-    const onSubmit = async (data) => {};
+    const onSubmit = async (data) => {
+        getUserInfo(data);
+    };
 
     return (
         <Div>
