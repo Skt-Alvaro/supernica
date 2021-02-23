@@ -2,17 +2,24 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import logo from "../logo/logoletter2.png";
+import logo from "../../images/logo/logoletter2.png";
+import { useSelector } from "react-redux";
 
 export default function Header(props) {
+    const state = useSelector((state) => state.header);
+    console.log(state);
     const [header, setHeader] = useState(false);
     const classes = useStyles();
 
     const changeBackground = () => {
         if (window.scrollY >= 80) {
-            setHeader(true);
+            if (state?.change_backgroun_color) {
+                setHeader(true);
+            }
         } else {
-            setHeader(false);
+            if (state?.change_backgroun_color) {
+                setHeader(false);
+            }
         }
     };
 
@@ -21,9 +28,9 @@ export default function Header(props) {
     return (
         <div className={classes.root}>
             <AppBar
-                position={props.position}
+                position={state?.position}
                 className={
-                    props.color || header
+                    !header
                         ? `${props.className} ${classes.rootActive}`
                         : `${props.className} ${classes.root}`
                 }

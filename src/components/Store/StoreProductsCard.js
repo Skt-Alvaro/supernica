@@ -11,7 +11,6 @@ import "./style.css";
 import gente from "../../images/gente.jpg";
 
 const CustomCard = (props) => {
-    console.log(props);
     const price = 200000;
     let si = price.toLocaleString("en");
 

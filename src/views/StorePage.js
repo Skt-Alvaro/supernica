@@ -1,30 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles } from "@material-ui/core/styles";
-import Header from "../Header";
-import IconButtonC from "../IconButtonC";
-import Hello from "../Hello";
-import StoreItems from "./StoreItems";
-import { useSelector } from "react-redux";
-import useOpenDrawer from "../../helpers/useOpenDrawer";
-import StoreBanner from "./StoreBanner";
+import StoreItems from "../components/Store/StoreItems";
+import StoreBanner from "../components/Store/StoreBanner";
 
-function StorePage(props) {
-    const { user } = useSelector((state) => state.user);
-    const { window } = props;
+function StorePage() {
     const classes = useStyles();
-    const { mobileOpen, handleDrawerToggle, container } = useOpenDrawer(window);
 
     return (
         <div className={classes.root}>
             <CssBaseline />
-            <Header
-                position="fixed"
-                className={classes.appBar}
-                icon={<IconButtonC open={handleDrawerToggle} />}
-                hello={<Hello name={user.firstname} />}
-            />
             <StoreBanner />
             <StoreItems />
         </div>

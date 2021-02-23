@@ -6,8 +6,7 @@ import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import { Link, useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import InputLabel from "@material-ui/core/InputLabel";
 import Grid from "@material-ui/core/Grid";
 import FolderSharedIcon from "@material-ui/icons/FolderShared";
@@ -15,19 +14,13 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useForm } from "react-hook-form";
-import { registerAction } from "../../store/actions/registerAction";
-import swal from "sweetalert";
-import Spinner from "../Spinner";
 
-export default function RegisterPage() {
-    const dispatch = useDispatch();
-    const history = useHistory();
+export default function Register() {
     const { register, handleSubmit, errors, watch } = useForm();
     const password = useRef({});
     password.current = watch("password", "");
     const [country, setCountry] = useState("");
     const [countryReq, setCountryReq] = useState(false);
-    const { loading } = useSelector((state) => state.user);
 
     const handleChange = (event) => {
         setCountry(event.target.value);
@@ -39,23 +32,12 @@ export default function RegisterPage() {
         if (!country) {
             setCountryReq(true);
         } else {
-            let { error, errorMsg } = await dispatch(registerAction(data));
-            if (error) {
-                swal({
-                    title: errorMsg,
-                    icon: "error",
-                    buttons: "Continuar",
-                });
-            } else {
-                history.push("/store");
-            }
             setCountryReq(false);
         }
     };
 
     return (
         <div className={classes.container}>
-            {loading ? <Spinner /> : null}
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <div className={classes.paper}>
@@ -67,7 +49,7 @@ export default function RegisterPage() {
                         variant="h5"
                         className={classes.blueColor}
                     >
-                        Registro
+                        Sign In
                     </Typography>
                     <form
                         className={classes.form}
@@ -80,7 +62,7 @@ export default function RegisterPage() {
                                     inputRef={register({
                                         required: {
                                             value: true,
-                                            message: "Este campo es requerido",
+                                            message: "This field is required",
                                         },
                                     })}
                                     autoComplete="fname"
@@ -89,7 +71,7 @@ export default function RegisterPage() {
                                     fullWidth
                                     id="firstName"
                                     color={"secondary"}
-                                    label="Nombre"
+                                    label="First Name"
                                     InputLabelProps={{
                                         className: classes.blueColor,
                                     }}
@@ -106,13 +88,13 @@ export default function RegisterPage() {
                                     inputRef={register({
                                         required: {
                                             value: true,
-                                            message: "Este campo es requerido",
+                                            message: "This field is required",
                                         },
                                     })}
                                     variant="outlined"
                                     fullWidth
                                     id="lastName"
-                                    label="Apellido"
+                                    label="Last Name"
                                     name="lastname"
                                     autoComplete="lname"
                                     color={"secondary"}
@@ -132,7 +114,7 @@ export default function RegisterPage() {
                                     inputRef={register({
                                         required: {
                                             value: true,
-                                            message: "Este campo es requerido",
+                                            message: "This field is required",
                                         },
                                         pattern: {
                                             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
@@ -142,7 +124,7 @@ export default function RegisterPage() {
                                     variant="outlined"
                                     fullWidth
                                     id="email"
-                                    label="Correo electrónico"
+                                    label="Email"
                                     name="email"
                                     color={"secondary"}
                                     autoComplete="email"
@@ -162,18 +144,18 @@ export default function RegisterPage() {
                                     inputRef={register({
                                         required: {
                                             value: true,
-                                            message: "Este campo es requerido",
+                                            message: "This field is required",
                                         },
                                         minLength: {
                                             value: 8,
                                             message:
-                                                "Tu contraseña debe tener mínimo 8 caracteres",
+                                                "Your password must be at least 8 characters long",
                                         },
                                     })}
                                     variant="outlined"
                                     fullWidth
                                     name="password"
-                                    label="Contraseña"
+                                    label="Password"
                                     color={"secondary"}
                                     type="password"
                                     id="password"
@@ -194,21 +176,21 @@ export default function RegisterPage() {
                                     inputRef={register({
                                         required: {
                                             value: true,
-                                            message: "Este campo es requerido",
+                                            message: "This field is required",
                                         },
                                         minLength: {
                                             value: 8,
                                             message:
-                                                "Tu contraseña debe tener mínimo 8 caracteres",
+                                                "Your password must be at least 8 characters long",
                                         },
                                         validate: (value) =>
                                             value === password.current ||
-                                            "Las contraseñas deben ser iguales",
+                                            "The passwords have to be equals",
                                     })}
                                     variant="outlined"
                                     fullWidth
                                     name="c_password"
-                                    label="Confirmar contraseña"
+                                    label="Confirm Password"
                                     type="password"
                                     id="c_password"
                                     autoComplete="confirm-password"
@@ -233,7 +215,7 @@ export default function RegisterPage() {
                                         id="demo-simple-select-filled-label"
                                         className={classes.blueColor}
                                     >
-                                        Seleccione su país
+                                        Select your country
                                     </InputLabel>
                                     <Select
                                         labelId="demo-simple-select-filled-label"
@@ -244,7 +226,7 @@ export default function RegisterPage() {
                                             required: {
                                                 value: true,
                                                 message:
-                                                    "Este campo es requerido",
+                                                    "This field is required",
                                             },
                                         })}
                                         name="country"
@@ -267,7 +249,7 @@ export default function RegisterPage() {
                                     </Select>
                                     {countryReq ? (
                                         <label style={{ color: "red" }}>
-                                            Este campo es obligatorio
+                                            This field is required
                                         </label>
                                     ) : null}
                                 </FormControl>
@@ -280,16 +262,16 @@ export default function RegisterPage() {
                             color="primary"
                             className={classes.submit}
                         >
-                            Registrarse
+                            Sign In
                         </Button>
                         <Grid container justify="flex-end">
                             <Grid item>
                                 <div className={classes.register}>
                                     <p className={classes.mr}>
-                                        ¿Ya tienes cuenta?
+                                        Do you have an account?
                                     </p>
                                     <Link to="/login">
-                                        <a href>Inicia sesión</a>
+                                        <a href>Log In</a>
                                     </Link>
                                 </div>
                             </Grid>

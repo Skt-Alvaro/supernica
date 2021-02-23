@@ -1,5 +1,6 @@
 import * as loginTypes from "../types/loginTypes";
 import * as registerTypes from "../types/registerTypes";
+import * as getUserByTokenTypes from "../types/userByTokenTypes";
 
 const initial_data = {
     token: "",
@@ -14,6 +15,9 @@ export default function loginReducer(state = initial_data, action) {
             return { ...state, loading: true };
 
         case registerTypes.REGISTER_LOADING:
+            return { ...state, loading: true };
+
+        case getUserByTokenTypes.USER_BY_TOKEN_LOADING:
             return { ...state, loading: true };
 
         case loginTypes.LOGIN_LOAD:
@@ -34,10 +38,21 @@ export default function loginReducer(state = initial_data, action) {
                 error: "",
             };
 
+        case getUserByTokenTypes.USER_BY_TOKEN_LOAD:
+            return {
+                ...state,
+                user: action.payload,
+                loading: false,
+                error: "",
+            };
+
         case loginTypes.LOGIN_ERROR:
             return { ...state, error: action.payload, loading: false };
 
         case registerTypes.REGISTER_ERROR:
+            return { ...state, error: action.payload, loading: false };
+
+        case getUserByTokenTypes.USER_BY_TOKEN_ERROR:
             return { ...state, error: action.payload, loading: false };
 
         default:

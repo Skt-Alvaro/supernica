@@ -1,62 +1,42 @@
 import React from "react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
-import { loginAction } from "../../store/actions/loginAction";
-import { useDispatch, useSelector } from "react-redux";
-import swal from "sweetalert";
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
-import Spinner from "../Spinner";
 
-const Login = () => {
+const Login = (data) => {
     const classes = useStyle();
-    const history = useHistory();
-    const dispatch = useDispatch();
-    const { loading } = useSelector((state) => state.user);
     const { register, handleSubmit, errors } = useForm();
 
-    const onSubmit = async (data) => {
-        let { error, errorMsg } = await dispatch(loginAction(data));
-
-        if (error) {
-            swal({
-                title: errorMsg,
-                icon: "error",
-                buttons: "Continuar",
-            });
-        } else {
-            history.push("/store");
-        }
-    };
+    const onSubmit = async (data) => {};
 
     return (
         <Div>
-            {loading ? <Spinner /> : null}
             <Grid container>
                 <Grid item xs={12}>
                     <form
                         onSubmit={handleSubmit(onSubmit)}
                         className={classes.container}
                     >
-                        <Typography variant="h4" color="initial">
-                            Ingresa tu cuenta
+                        <Typography variant="h4" color="textSecondary">
+                            Enter your account
                         </Typography>
                         <div className={classes.inputContainer}>
                             <input
                                 className={classes.input}
                                 type="email"
-                                placeholder="Correo Electrónico"
+                                placeholder="Email"
                                 name="email"
                                 ref={register({
                                     required: {
                                         value: true,
-                                        message: "Este campo es obligatorio",
+                                        message: "This field is required",
                                     },
                                     pattern: {
                                         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                                        message: "El email no es válido",
+                                        message: "The email isn't valid",
                                     },
                                 })}
                             />
@@ -68,12 +48,12 @@ const Login = () => {
                             <input
                                 className={classes.input}
                                 type="password"
-                                placeholder="Contraseña"
+                                placeholder="Password"
                                 name="password"
                                 ref={register({
                                     required: {
                                         value: true,
-                                        message: "Este campo es obligatorio",
+                                        message: "This field is required",
                                     },
                                 })}
                             />
@@ -84,12 +64,20 @@ const Login = () => {
                         <input
                             className={classes.button}
                             type="submit"
-                            value="Iniciar sesión"
+                            value="Log In"
                         />
                     </form>
                     <div className={classes.register}>
-                        <p className={classes.mr}>¿Aún no tienes cuenta?</p>
-                        <Link to="/register">Crea tu cuenta ahora</Link>
+                        <Typography
+                            className={classes.mr}
+                            variant="body1"
+                            color="textSecondary"
+                        >
+                            You don't have an accout?
+                        </Typography>
+                        <Link className={classes.registerLink} to="/register">
+                            Sign In
+                        </Link>
                     </div>
                 </Grid>
             </Grid>
@@ -133,16 +121,24 @@ const useStyle = makeStyles((theme) => ({
         display: "flex",
         justifyContent: "center",
         marginTop: "10px",
+        alignItems: "center",
+        [theme.breakpoints.down("xs")]: {
+            display: "block",
+            textAlign: "center",
+        },
     },
     mr: {
         marginRight: "5px",
+    },
+    registerLink: {
+        color: theme.palette.primary.main,
     },
 }));
 
 const Div = styled.div`
     display: flex;
     justify-content: center;
-    margin-top: 24%;
+    margin-top: 12%;
 
     @media (max-width: 768px) {
         margin-top: 3%;

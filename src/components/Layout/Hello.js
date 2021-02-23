@@ -1,20 +1,17 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import Hidden from "@material-ui/core/Hidden";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import Button from "@material-ui/core/Button";
 
 const Hello = (props) => {
-    const { token } = useSelector((state) => state.user);
     const classes = useStyle();
     return (
         <div>
             <Typography variant="h6" color="initial" className={classes.name}>
-                {token ? (
-                    `Hi, ${props.name}`
+                {props.name ? (
+                    `Hi, ${props?.name}`
                 ) : (
                     <div className={classes.items}>
                         <div>
