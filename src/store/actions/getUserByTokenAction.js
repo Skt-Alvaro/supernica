@@ -5,7 +5,7 @@ export const getUserByTokenAction = () => async (dispatch) => {
         type: types.USER_BY_TOKEN_LOADING,
     });
     try {
-        const url = "http://127.0.0.1:8000/api/users/get-user-by-token";
+        const url = process.env.REACT_APP_GET_USER_BY_TOKEN_ENDPOINT;
         const req = await fetch(url, {
             method: "GET",
             headers: {

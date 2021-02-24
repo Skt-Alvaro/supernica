@@ -5,7 +5,7 @@ export const registerAction = (request) => async (dispatch) => {
         type: types.REGISTER_LOADING,
     });
     try {
-        const url = "http://127.0.0.1:8000/api/users/register";
+        const url = process.env.REACT_APP_REGISTER_ENDPOINT;
         const req = await fetch(url, {
             method: "POST",
             headers: {

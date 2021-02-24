@@ -9,8 +9,6 @@ import {
     makeStyles,
 } from "@material-ui/core";
 import "./style.css";
-import gente from "../../images/gente.jpg";
-const host = "http://localhost/api/public";
 
 const ProductCard = (props) => {
     const classes = useStyle();
@@ -24,7 +22,7 @@ const ProductCard = (props) => {
                     alt=""
                     height="260"
                     className={`card-image ${classes.img}`}
-                    image={`${host}${product.file}`}
+                    image={`${process.env.REACT_APP_HOST_FOR_IMAGES}${product.file}`}
                 />
                 <CardContent className="content">
                     <Typography

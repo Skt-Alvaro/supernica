@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import ProductCard from "./ProductCard";
-import { getProducts } from "../../helpers/Products/getProducts";
+import { productsAction } from "../../store/actions/productsAction";
 import Spinner from "../Layout/Spinner";
+import { useSelector, useDispatch } from "react-redux";
 
 // const products = [
 //     "Camisa de olor azulado oscuro",
@@ -13,15 +14,11 @@ import Spinner from "../Layout/Spinner";
 // ];
 
 const Products = () => {
-    const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch();
+    const { products, loading } = useSelector((state) => state.products);
 
     const callGetProducts = async () => {
-        setLoading(true);
-        let si = await getProducts();
-        console.log(si);
-        setProducts(si);
-        setLoading(false);
+        await dispatch(productsAction());
     };
 
     useEffect(() => {

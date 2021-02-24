@@ -6,7 +6,7 @@ export const loginAction = (request) => async (dispatch) => {
     });
 
     try {
-        const url = "http://127.0.0.1:8000/api/users/login";
+        const url = process.env.REACT_APP_LOGIN_ENDPOINT;
         const req = await fetch(url, {
             method: "POST",
             headers: {
