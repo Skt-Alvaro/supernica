@@ -6,13 +6,15 @@ import {
     CardActions,
     Typography,
     CardActionArea,
+    makeStyles,
 } from "@material-ui/core";
 import "./style.css";
 import gente from "../../images/gente.jpg";
+const host = "http://localhost/api/public";
 
-const CustomCard = (props) => {
-    const price = 200000;
-    let si = price.toLocaleString("en");
+const ProductCard = (props) => {
+    const classes = useStyle();
+    const { product } = props;
 
     return (
         <Card className="custom-card">
@@ -21,8 +23,8 @@ const CustomCard = (props) => {
                     component="img"
                     alt=""
                     height="260"
-                    className="card-image"
-                    image={gente}
+                    className={`card-image ${classes.img}`}
+                    image={`${host}${product.file}`}
                 />
                 <CardContent className="content">
                     <Typography
@@ -31,7 +33,7 @@ const CustomCard = (props) => {
                         variant="h5"
                         component="h2"
                     >
-                        {props.title}
+                        {product.name}
                     </Typography>
                 </CardContent>
             </CardActionArea>
@@ -42,11 +44,17 @@ const CustomCard = (props) => {
                     variant="h6"
                     component="h2"
                 >
-                    ${si}
+                    ${product.price}
                 </Typography>
             </CardActions>
         </Card>
     );
 };
 
-export default CustomCard;
+export default ProductCard;
+
+const useStyle = makeStyles({
+    img: {
+        objectFit: "contain",
+    },
+});

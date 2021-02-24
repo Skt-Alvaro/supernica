@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles } from "@material-ui/core/styles";
-import StoreItems from "../components/Store/StoreItems";
 import StoreBanner from "../components/Store/StoreBanner";
 import { useDispatch } from "react-redux";
 import { headerAction } from "../store/actions/headerAction";
+import Products from "../components/Products/Products";
 
 function StorePage() {
     const dispatch = useDispatch();
@@ -24,7 +24,7 @@ function StorePage() {
         <div className={classes.root}>
             <CssBaseline />
             <StoreBanner />
-            <StoreItems />
+            <Products />
         </div>
     );
 }
