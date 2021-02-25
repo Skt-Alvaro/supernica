@@ -35,32 +35,8 @@ StorePage.propTypes = {
 
 export default StorePage;
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
     root: {
         background: "#15161A",
     },
-    appBar: {
-        zIndex: theme.zIndex.drawer + 1,
-    },
-    menuButton: {
-        marginRight: theme.spacing(2),
-        [theme.breakpoints.up("sm")]: {
-            display: "none",
-        },
-    },
-    toolbar: theme.mixins.toolbar,
-    content: {
-        width: "100%",
-        margin: "0 auto",
-        [theme.breakpoints.down("sm")]: {
-            padding: "10px",
-        },
-    },
-    gridcontainer: {
-        justifyContent: "space-between",
-    },
-    name: {
-        position: "absolute",
-        right: "20px",
-    },
-}));
+});

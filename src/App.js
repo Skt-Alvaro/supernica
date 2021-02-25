@@ -10,6 +10,7 @@ import theme from "./helpers/themeConfig";
 import PrivateRoute from "./PrivateRoute";
 import "./main.css";
 import Layout from "./components/Layout/Layout";
+import ProductInfoPage from "./views/ProductInfoPage";
 
 let routeList = [
     {
@@ -27,11 +28,11 @@ let routeList = [
         component: StorePage,
         private: true,
     },
-    // {
-    //     path: "/product/:id",
-    //     component: ProductPage,
-    //     private: true,
-    // },
+    {
+        path: "/product/:id",
+        component: ProductInfoPage,
+        private: true,
+    },
 ];
 
 function App() {

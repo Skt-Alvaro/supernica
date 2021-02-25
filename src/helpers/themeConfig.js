@@ -10,7 +10,7 @@ const theme = createMuiTheme({
             main: "#F8BBF7",
         },
         text: {
-            secondary: "#fff",
+            secondary: "#C9D1CE",
         },
     },
     breakpoints: {
